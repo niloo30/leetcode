@@ -1,11 +1,12 @@
 class Solution {
 public:
-    set<vector<int>> st;
+    // set<vector<int>> st;
+    vector<vector<int>> ans;
     void f(int i,int n,vector<int>& arr,vector<int>& v)
     {
         if(i==n)
         {
-            st.insert(v);
+            ans.push_back(v);
             return ;
         }
 
@@ -18,11 +19,11 @@ public:
     }
     vector<vector<int>> subsets(vector<int>& nums) {
 
-        sort(nums.begin(),nums.end());
+       // sort(nums.begin(),nums.end());
         int n=nums.size();
         vector<int> v;
         f(0,n,nums,v);
-        vector<vector<int>> ans(st.begin(),st.end());
+       // vector<vector<int>> ans(st.begin(),st.end());
 
         return ans;
         
