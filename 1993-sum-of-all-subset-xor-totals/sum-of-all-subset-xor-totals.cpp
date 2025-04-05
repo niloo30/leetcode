@@ -8,7 +8,7 @@ public:
             ans+=val;
             return ;
         }
-
+        val=val^nums[i];
         f(nums,i+1,val,n);
         val=val^nums[i];
         f(nums,i+1,val,n);
