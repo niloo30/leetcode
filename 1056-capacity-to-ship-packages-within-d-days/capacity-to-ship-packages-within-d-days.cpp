@@ -5,13 +5,19 @@ public:
         int count = 1; 
         int tempsum = 0;
 
-        for (int it : arr) {
-            if (it > mid) return false; 
-            if (tempsum + it > mid) {
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i]>mid)
+            return false;
+            
+            if(arr[i]+tempsum<=mid)
+            {
+                tempsum+=arr[i];
+            }
+            else
+            {
                 count++;
-                tempsum = it;
-            } else {
-                tempsum += it;
+                tempsum=arr[i];
             }
         }
 
