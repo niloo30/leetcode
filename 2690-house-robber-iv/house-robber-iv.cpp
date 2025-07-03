@@ -3,22 +3,16 @@ public:
     bool check(int mid,vector<int>& nums,int k)
     {
         int count=0;
-        int prev=-1;
-        for(int i=0;i<nums.size();i++)
+        
+        for(int i=0;i<nums.size();)
         {
             if(nums[i]<=mid)
             {
-                if(prev==-1)
-                {
-                    count++;
-                    prev=i;
-                }
-                else if(prev!=(i-1))
-                {
-                    count++;
-                    prev=i;
-                }
+               count++;
+               i+=2;
             }
+            else
+            i++;
         }
 
         return count>=k;
