@@ -9,7 +9,7 @@ public:
     }
     ll f(string & s,int k)
     {
-        map<char,int> mp;
+        unordered_map<char,int> mp;
         int count=0;
 
         int i=0,j=0;
