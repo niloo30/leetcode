@@ -2,15 +2,15 @@ class Solution {
 public:
     int nonSpecialCount(int l, int r) {
 
-
-        vector<bool> arr(1e5,true);
+        int x=sqrt(r)+1;
+        vector<bool> arr(x,true);
         arr[0]=arr[1]=false; 
         
-        for(int i=2;i*i<=arr.size();i++)
+        for(int i=2;i*i<arr.size();i++)
         {
             if(arr[i])
             {
-                for(int j=i*i;j<=arr.size();j+=i)
+                for(int j=i*i;j<arr.size();j+=i)
                 arr[j]=false;
             }
         }
