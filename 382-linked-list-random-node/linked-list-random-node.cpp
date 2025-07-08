@@ -1,6 +1,7 @@
 
 class Solution {
 public:
+    // O(n) time and O(n) space 
     vector<int> arr;
     Solution(ListNode* head) {
 
