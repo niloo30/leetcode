@@ -19,7 +19,7 @@ public:
                 if(i-mp[rem]>=2)
                 return true;
             }
-            if(mp.find(rem)==mp.end())
+            else
             mp[rem]=i;
 
         }
