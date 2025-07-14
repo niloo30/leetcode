@@ -19,6 +19,8 @@ public:
         int noofque=arr[i][0];
         for(int j=1;j<=noofque;j++)
         {
+            if(j*arr[i][1]>val)
+            break;
             take=(take+f(val-j*arr[i][1],arr,i+1))%mod;
         }
         skip=f(val,arr,i+1);
