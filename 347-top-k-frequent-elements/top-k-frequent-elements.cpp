@@ -3,27 +3,38 @@ public:
     #define p pair<int,int> 
     vector<int> topKFrequent(vector<int>& nums, int k) {
 
-        map<int,int> mp;
-
+        unordered_map<int,int> mp;
+        int n=nums.size();
         for(int ele:nums)
         mp[ele]++;
 
-        priority_queue<p,vector<p>,greater<p>> pq;
+        vector<vector<int>> bucket(n+1);
+        // will act like buckrt 
+        // index as frequency 
 
-        for(auto x:mp)
+        for(auto ele:mp)
         {
-            pair<int,int> a={x.second,x.first};
-            pq.push(a);
-            if(pq.size()>k)
-            pq.pop();
-        }
-        vector<int> ans;
+            int element=ele.first;
+            int freq=ele.second;
 
-        while(!pq.empty())
-        {
-            ans.push_back(pq.top().second);
-            pq.pop();
+            bucket[freq].push_back(element);
         }
+        
+        vector<int> ans; // answer store karayla
+
+        for(int i=n;i>=0;i--)
+        {
+            if(bucket[i].size()==0)
+            continue;
+
+            while(bucket[i].size()>0 && k)
+            {
+                ans.push_back(bucket[i].back());
+                bucket[i].pop_back();
+                k--;
+            }
+        }
+
         return ans;
 
         
