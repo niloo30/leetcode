@@ -14,7 +14,7 @@ public:
 
         for(int ele:nums)
         {
-            ans+=(abs(ele-val));
+            ans+=(ele-val);
         }
         return ans;
         
