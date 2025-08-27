@@ -5,25 +5,20 @@ public:
         int n=nums.size();
 
         int ans=0;
-        vector<int> bit(32,0);
-
-        for(int i=0;i<n;i++)
-        {
-            int val=nums[i];
-            for(int j=0;j<32;j++)
-            {
-                if(val & (1<<j))
-                bit[j]++;
-            }
-            
-        }
+        
         for(int i=0;i<32;i++)
         {
-            if(bit[i]%3)
+            int count=0;
+            for(int j=0;j<n;j++)
             {
-                ans|=(1<<i);
+                if(nums[j]&(1<<i))
+                count++;
             }
+            if(count%3)
+            ans|=(1<<i);
         }
+
+       
 
         return ans;
     }
