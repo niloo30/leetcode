@@ -1,30 +1,30 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-
+        
         int n=nums.size();
 
         int ans=0;
-        
-        int zero=0;
+        vector<int> bit(32,0);
 
-        for(int i=0;i<=31;i++)
+        for(int i=0;i<n;i++)
         {
-            int ones=0;
-            for(int j=0;j<n;j++)
+            int val=nums[i];
+            for(int j=0;j<32;j++)
             {
-                int x=nums[j];
-                if((x & (1<<i)))
-                ones++;
+                if(val & (1<<j))
+                bit[j]++;
             }
-            if(ones%3)
-            ans=(ans|(1<<i));
-
-
+            
+        }
+        for(int i=0;i<32;i++)
+        {
+            if(bit[i]%3)
+            {
+                ans|=(1<<i);
+            }
         }
 
-
         return ans;
-        
     }
 };
