@@ -5,7 +5,7 @@ public:
         int n=grid.size();
         int m=grid[0].size();
 
-        map<int,vector<int>> mp;
+        unordered_map<int,vector<int>> mp;
 
         for(int i=0;i<n;i++)
         {
