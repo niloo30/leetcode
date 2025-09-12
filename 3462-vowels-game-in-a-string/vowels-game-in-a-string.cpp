@@ -10,11 +10,11 @@ public:
         for(char ch:s)
         {
             if(isvowel(ch))
-            count++;
+            return true;
         }
         
 
 
-        return count>=1;
+        return false;
     }
 };
