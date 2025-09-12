@@ -7,7 +7,7 @@ public:
     bool doesAliceWin(string s) {
         
         int count=0;
-        for(char ch:s)
+        for(char &ch:s)
         {
             if(isvowel(ch))
             return true;
