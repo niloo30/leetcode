@@ -1,23 +1,21 @@
 class SmallestInfiniteSet {
 public:
-    unordered_set<int> st;
-    priority_queue<int,vector<int>,greater<int>> pq;
+    set<int> st;
 
 
     SmallestInfiniteSet() {
        for(int num=1;num<=1000;num++)
         {
             st.insert(num);
-            pq.push(num);
         } 
     }
     
     int popSmallest() {
         
-        int x=pq.top();
-        pq.pop();
+        int x=*st.begin();
+        
 
-        st.erase(x);
+        st.erase(st.begin());
         return x;
     }
     
@@ -26,7 +24,7 @@ public:
         if(st.find(num)==st.end())
         {
             st.insert(num);
-            pq.push(num);
+            
         }
     }
 };
