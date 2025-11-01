@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(int val,map<int,vector<int>>& arr,unordered_set<int>& visited,vector<int>& ans)
+    void dfs(int val,unordered_map<int,vector<int>>& arr,unordered_set<int>& visited,vector<int>& ans)
     {
         ans.push_back(val);
         visited.insert(val);
@@ -16,7 +16,7 @@ public:
     vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
 
 
-        map<int,vector<int>> arr;
+        unordered_map<int,vector<int>> arr;
         int n=adjacentPairs.size();
 
 
