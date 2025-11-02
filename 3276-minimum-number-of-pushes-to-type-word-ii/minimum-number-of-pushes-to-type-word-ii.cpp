@@ -8,57 +8,30 @@ public:
         for(auto ch:word)
         arr[ch-'a']++;
 
-        priority_queue<pair<int,char>> pq;
+        // priority_queue<pair<int,char>> pq;
 
-        for(int i=0;i<26;i++)
-        {
-            if(arr[i]>0)
-            {
-                pq.push({arr[i],(i+'a')});
-            }
-        }
-        string t="";
-        while(pq.size()>0)
-        {
-            int f=pq.top().first;
-            char ch=pq.top().second;
+        // for(int i=0;i<26;i++)
+        // {
+        //     if(arr[i]>0)
+        //     {
+        //         pq.push({arr[i],(i+'a')});
+        //     }
+        // }
+        // arr.clear();
+        // vector<int> arr;
+        // while(pq.size())
+        // {
+        //     arr.push_back(pq.top().first);
+        //     pq.pop();
+        // }
 
-            pq.pop();
-            while(f--)
-            {
-                t+=ch;
-            }
-        }
+        sort(arr.rbegin(),arr.rend());
 
-        unordered_map<char,int> mp;
-
-        for(int i=0;i<n;i++)
-        {
-            char ch=t[i];
-            if(mp.find(ch)==mp.end())
-            {
-                if(mp.size()<8)
-                {
-                    mp[ch]=1;
-                }
-                else if(mp.size()<16)
-                {
-                    mp[ch]=2;
-                }
-                else
-                if(mp.size()<24)
-                {
-                    mp[ch]=3;
-                }
-                else
-                mp[ch]=4;
-            }
-        }
 
         int ans=0;
-        for(int i=0;i<n;i++)
+        for(int i=0;i<arr.size();i++)
         {
-            ans+=mp[word[i]];
+            ans+=(arr[i]*((i)/8+1));
         }
 
         return ans;
