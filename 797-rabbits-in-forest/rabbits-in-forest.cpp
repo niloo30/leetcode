@@ -1,35 +1,28 @@
 class Solution {
 public:
-    int numRabbits(vector<int>& answers) {
+    int numRabbits(vector<int>& arr) {
+
+        int n=arr.size();
+
+        int ans=0;
 
         unordered_map<int,int> mp;
-
-        for(int ele:answers)
-        mp[ele]++;
-
-
-        int result=0;
+        for(int i=0;i<n;i++)
+        mp[arr[i]]++;
 
         for(auto ele:mp)
         {
-            // if(ele.first==0)
-            // {
-            //     result+=ele.second;
-            //     continue;
+            int f=ele.first;
+            int s=ele.second;
 
-            // }
-            
-
-            int freq=ele.second;
-            int val=ele.first+1;
-            while(freq>0)
+            while(s>0)
             {
-                result+=val;
-                freq=freq-val;
+                ans+=(f+1);
+                s-=(f+1);
             }
         }
 
-        return result;
+        return ans;
         
     }
 };
