@@ -1,36 +1,24 @@
 
 class Solution {
 public:
-    int ans=0;
-    void rec(int amt,TreeNode* root)
-    {
-        if(root==NULL)
-        return ;
-
-        ans=max(ans,abs(amt-root->val));
-
-        rec(amt,root->left);
-        rec(amt,root->right);
-    }
-    int f(TreeNode* root)
+    int f(TreeNode* root,int mn,int mx)
     {
         if(!root)
-        return ans;
+        return (mx-mn);
 
-        rec(root->val,root->left);
-        rec(root->val,root->right);
 
-        return max(f(root->left),f(root->right));
+        mn=min(mn,root->val);
+        mx=max(mx,root->val);
 
-        return ans;
+        return max(f(root->left,mn,mx),f(root->right,mn,mx));
     }
     int maxAncestorDiff(TreeNode* root) {
-        
 
-        if(root==NULL)
+        if(!root)
         return 0;
 
 
-        return f(root);
+        return f(root,1e9,-1e9);
+        
     }
 };
