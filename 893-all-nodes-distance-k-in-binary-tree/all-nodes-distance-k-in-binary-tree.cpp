@@ -64,6 +64,8 @@ public:
                 st.insert(mp[temp]);
                 }
             }
+            if(curr==k)
+            break;
             curr++;
         }
 
