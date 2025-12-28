@@ -8,9 +8,10 @@ public:
         int ans=0;
         for(int i=0;i<m;i++)
         {
-            for(int j=0;j<n;j++)
-            if(grid[i][j]<0)
-            ans++;
+            vector<int> arr=grid[i];
+
+            int idx=upper_bound(arr.begin(),arr.end(),0,greater<int>())-arr.begin();
+            ans+=(n-idx);
         }
 
         return ans;
