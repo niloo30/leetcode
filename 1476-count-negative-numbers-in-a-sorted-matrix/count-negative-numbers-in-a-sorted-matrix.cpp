@@ -6,12 +6,18 @@ public:
         int n=grid[0].size();
 
         int ans=0;
-        for(int i=0;i<m;i++)
-        {
-            vector<int> arr=grid[i];
+        int r=m-1;
+        int c=0;
 
-            int idx=upper_bound(arr.begin(),arr.end(),0,greater<int>())-arr.begin();
-            ans+=(n-idx);
+        while(c<n and r>=0)
+        {
+            if(grid[r][c]>=0)
+            c++;
+            else
+            {
+                ans+=(n-c);
+                r--;
+            }
         }
 
         return ans;
