@@ -1,16 +1,12 @@
 class Solution {
 public:
     int repeatedNTimes(vector<int>& nums) {
-
-        unordered_set<int> st;
-        for(int ele:nums)
-        {
-            if(st.contains(ele))
-            return ele;
-
-            st.insert(ele);
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        if(nums[(n/2)-1]==nums[(n/2)-2]){
+            return nums[(n/2)-1];
         }
-        return 0;
+        return nums[(n/2)];
         
     }
 };
