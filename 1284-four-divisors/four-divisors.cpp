@@ -26,6 +26,8 @@ public:
                     else
                     divs++;
                 }
+                if(divs>4)
+                break;
             }
             if(divs==4)
             ans+=div_sum;
