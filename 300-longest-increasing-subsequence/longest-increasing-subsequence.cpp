@@ -1,24 +1,27 @@
 class Solution {
 public:
-    int lengthOfLIS(vector<int>& nums) {
+    int lengthOfLIS(vector<int>& arr) {
 
-        int n=nums.size();
         vector<int> ans;
+    ans.push_back(arr[0]);
 
-        for(int i=0;i<n;i++)
-        {
-            if(ans.size()==0 || nums[i]>ans.back())
-            ans.push_back(nums[i]);
-            else
-            {
-                auto it=lower_bound(ans.begin(),ans.end(),nums[i]);
-                *it=nums[i];
-            }
+
+    int n=arr.size();
+
+    for(int i=1;i<n;i++) {
+        if(arr[i]>ans.back()) {
+            ans.push_back(arr[i]);
         }
-        // if te bollele to print then 
-        for(auto ele:ans)
-        cout<<ele<<" ";
-        return ans.size();
+        else {
+            int idx = lower_bound(ans.begin(), ans.end(), arr[i]) - ans.begin();
+
+            if(idx<ans.size())
+            ans[idx] = arr[i];
+        }
+    }
+
+    cout<<ans.size()<<endl;
+    return ans.size();
         
     }
 };
