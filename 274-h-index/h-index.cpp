@@ -1,30 +1,27 @@
 class Solution {
 public:
-    bool check(int mid,vector<int> arr)
-    {
-        int idx=lower_bound(arr.begin(),arr.end(),mid)-arr.begin();
-
-        return arr.size()-idx>=mid;
-    }
+   
     int hIndex(vector<int>& arr) {
 
-        int l=0;
-        int h=arr.size();
+        
+        int n=arr.size();
 
-        sort(arr.begin(),arr.end());
         int ans=0;
+        vector<int> freq(n+1,0);
 
-        while(l<=h)
+        for(int i=0;i<n;i++)
         {
-            int mid=(h+l)/2;
-            if(check(mid,arr))
-            {
-                ans=mid;
-                l=mid+1;
-            }
-            else
-            h=mid-1;
+            int val=min(n,arr[i]);
+            freq[val]++;
         }
+        for(int i=n-1;i>=0;i--)
+        {
+            freq[i]+=freq[i+1];
+        }
+
+        for(int i=0;i<=n;i++)
+        if(freq[i]>=i)
+        ans=i;
         return ans;
         
     }
