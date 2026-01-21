@@ -4,24 +4,23 @@ public:
 
         vector<int> ans;
        // deque<int> q;
-        multiset<int> st;
+        map<int,int> st;
         int n=nums.size();
 
         int i=0,j=0;
 
         while(j<n){
-            st.insert(nums[j]);
+            st[nums[j]]++;
 
             if(j-i+1==k)
             {
-                int val=*st.rbegin();
+                int val=st.rbegin()->first;
                 ans.push_back(val);
 
                 //slide the window
-                auto it = st.find(nums[i]);
-                if (it != st.end()) {
-                    st.erase(it);  
-                }
+                st[nums[i]]--;
+                if(st[nums[i]]==0)
+                st.erase(nums[i]);
                 i++;
             }
             j++;
