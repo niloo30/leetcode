@@ -4,7 +4,7 @@ public:
         int n=s.size();
 
         int i=0,j=0;
-        set<string> st;
+        unordered_set<string> st;
 
         while(j<n)
         {
