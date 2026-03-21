@@ -1,22 +1,23 @@
 class Solution {
 public:
     vector<vector<int>> reverseSubmatrix(vector<vector<int>>& grid, int x, int y, int k) {
-
-        int startRow = x;
-        int endRow = x+k-1;
-
-        int startCol = y;
-        int endCol = y+k-1;
-
-        for(int i = startRow; i <= endRow; i++) {
-            for(int j = startCol; j <= endCol; j++) {
-                swap(grid[i][j], grid[endRow][j]);
-            }
-            endRow--;
+    vector<vector<int>> temp;
+    for (int i = x; i<x+k;++i) {
+        vector<int> row;
+        for (int j=y;j<y+k; ++j) {
+            row.push_back(grid[i][j]);
         }
-
-        return grid;
-
-        
+        temp.push_back(row);
+    }
+    
+    reverse(temp.begin(), temp.end());
+    
+    for (int i=x; i<x+k;++i) {
+        for (int j=y; j <y+k;++j) {
+            grid[i][j] = temp[i-x][j-y];
+        }
+    }
+    
+    return grid;
     }
 };
