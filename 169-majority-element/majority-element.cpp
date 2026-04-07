@@ -1,35 +1,24 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-
-        //try with bit manipulation
-
-        vector<int> bit(32,0);
-
+        //tc O(n^2)
+        //const space
+        //approach 1 
+        
         int n=nums.size();
-        for(int i=0;i<n;i++)
+        for(int ele:nums)
         {
-            int val=nums[i];
-
-            for(int j=0;j<32;j++)
+            int count=0;
+            for(int ele2:nums)
             {
-                if(val&(1<<j))
-                bit[j]++;
+                if(ele==ele2)
+                count++;
             }
+            if(count>n/2)
+            return ele;
         }
 
-        int ans=0;
-
-        for(int i=0;i<32;i++)
-        {
-            if(bit[i]>n/2)
-            {
-                ans|=(1<<i);
-            }
-        }
-
-
-        return ans;
+        return -1;
         
     }
 };
