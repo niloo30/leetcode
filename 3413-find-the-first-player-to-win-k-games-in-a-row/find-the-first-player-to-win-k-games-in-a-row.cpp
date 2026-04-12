@@ -2,7 +2,7 @@ class Solution {
 public:
     int findWinningPlayer(vector<int>& arr, int k) {
         int n=arr.size();
-        if(k>=n || n==2)
+        if(k>=(n-1) || n==2)
         return max_element(arr.begin(),arr.end())-arr.begin();
 
         deque<pair<int,int>> q;
