@@ -4,7 +4,7 @@ public:
 
 
         int n=arr.size();
-        if(k>=n || n==2)
+        if(k>=(n-1) || n==2)
         return *max_element(arr.begin(),arr.end());
 
         deque<pair<int,int>> q;
