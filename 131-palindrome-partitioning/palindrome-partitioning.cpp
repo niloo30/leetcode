@@ -1,46 +1,35 @@
 class Solution {
 public:
+    vector<vector<string>> ans;
     bool ispal(string s)
     {
-        int i=0;
-        int j=s.size()-1;
-
-        while(i<j)
-        {
-            if(s[i]!=s[j])
-            return false;
-
-            i++;
-            j--;
-        }
-        return true;
+        string t=s;
+        reverse(s.begin(),s.end());
+        return s==t;
     }
-    vector<vector<string>> ans;
-    void f(string& s,string temp,int i,int n,vector<string>& v)
+    void fun(string s,int i,vector<string>& arr)
     {
-        if(i>=n)
+        if(i>=s.size())
         {
-            ans.push_back(v);
+            ans.push_back(arr);
             return ;
         }
 
-        for(int j=i;j<n;j++)
+        for(int j=i;j<s.size();j++)
         {
             string t=s.substr(i,j-i+1);
             if(ispal(t))
             {
-                v.push_back(t);
-                f(s,temp,j+1,n,v);
-                v.pop_back();
+                arr.push_back(t);
+                fun(s,j+1,arr);
+                arr.pop_back();
             }
         }
-
     }
     vector<vector<string>> partition(string s) {
 
-        int n=s.size();
-        vector<string> v;
-        f(s,"",0,n,v);
+        vector<string> arr;
+        fun(s,0,arr);
 
         return ans;
         
