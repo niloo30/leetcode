@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+
+        int n=matrix.size();
+        //transopse le liya 
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(i>j)
+                swap(matrix[i][j],matrix[j][i]);
+            }
+        }
+
+        //reverse each row now
+        int k=0;
+        while(k<n)
+        {
+            int i=0;
+            int j=n-1;
+
+            while(i<j)
+            {
+                swap(matrix[k][i++],matrix[k][j--]);
+            }
+            k++;
+
+        }
+        return ;
+        
+    }
+};
