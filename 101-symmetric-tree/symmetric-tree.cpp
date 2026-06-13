@@ -1,21 +1,17 @@
 
 class Solution {
 public:
-    bool f(TreeNode* p,TreeNode* q){
-        if(!p and !q)
+    bool check(TreeNode* r,TreeNode* l){
+        if(l==nullptr and r==nullptr)
         return true;
 
-        if(!p or !q)
+        if(l ==nullptr || r==nullptr)
         return false;
 
-        return (p->val==q->val) && f(p->left,q->right) && f(p->right,q->left);
+        return r->val==l->val && check(r->left,l->right) && check(r->right,l->left);
     }
     bool isSymmetric(TreeNode* root) {
 
-        if(!root)
-        return true;
-
-        return f(root->left , root->right);
-        
+        return check(root->left,root->right);
     }
 };
