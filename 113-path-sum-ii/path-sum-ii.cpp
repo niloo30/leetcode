@@ -2,35 +2,27 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    void f(TreeNode* root,int sum,vector<int>& arr)
-    {
+    void rec(TreeNode* root,vector<int> v,int x){
         if(!root)
         return ;
-        if(root->left==NULL && root->right==NULL)
+
+        if(root->left==nullptr and root->right==nullptr)
         {
-            if(sum-root->val==0)
+            if(x==root->val)
             {
-                arr.push_back(root->val);
-                ans.push_back(arr);
-                arr.pop_back();
+                v.push_back(x);
+                ans.push_back(v);
+                return ;
             }
-
-            return ;
         }
-
-        arr.push_back(root->val);
-        f(root->right,sum-root->val,arr);
-        f(root->left,sum-root->val,arr);
-        arr.pop_back();
-        
-        
+        v.push_back(root->val);
+        rec(root->left,v,x-root->val);
+        rec(root->right,v,x-root->val);
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
 
-        vector<int> arr;
-
-
-        f(root,targetSum,arr);
+        vector<int> v;
+        rec(root,v,targetSum);
         return ans;
         
     }
