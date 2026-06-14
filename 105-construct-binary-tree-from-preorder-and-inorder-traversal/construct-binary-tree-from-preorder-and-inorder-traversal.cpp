@@ -1,33 +1,31 @@
 
 class Solution {
 public:
-    TreeNode* f(vector<int>& pre,vector<int>& in,int i,int j,int& idx)
-    {
-        if(idx>=in.size() || i>j)
-        return NULL;
-       
+    TreeNode* rec(vector<int>& pre,vector<int>& in,int s,int e,int& idx){
+        if(s>e)
+        return nullptr;
 
-        TreeNode* root=new TreeNode(pre[idx]);
-        int k=-1;
-        for(int p=i;p<=j;p++)
-        {
-            if(pre[idx]==in[p])
-            {
-                k=p;
+        int rootVal=pre[idx];
+        int i=s;
+        for(;i<e;i++){
+            if(in[i]==rootVal){
                 break;
             }
         }
         idx++;
-        root->left=f(pre,in,i,k-1,idx);
-        root->right=f(pre,in,k+1,j,idx);
+        TreeNode* root=new TreeNode(rootVal);
+        root->left=rec(pre,in,s,i-1,idx);
+        root->right=rec(pre,in,i+1,e,idx);
+
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
 
+        int n=inorder.size();
 
-        int n=preorder.size();
         int idx=0;
-        return f(preorder,inorder,0,n-1,idx);
+
+        return rec(preorder,inorder,0,n-1,idx);
         
     }
 };
