@@ -1,41 +1,38 @@
- 
+
 class Solution {
 public:
     #define ll unsigned long long 
     int widthOfBinaryTree(TreeNode* root) {
 
-        ll ans=0;
         deque<pair<TreeNode*,ll>> q;
 
         if(root)
         q.push_back({root,0});
 
-        while(!q.empty())
-        {
-            ll n=q.size();
-            ll l=q.front().second;
-            ll r=q.back().second;
+        ll ans=0;
+        while(!q.empty()){
 
-            ans=max(ans,r-l+1);
-            while(n--)
-            {
-                pair<TreeNode*,ll> temp=q.front();
+            int n=q.size();
+            auto first=q.front();
+            auto last=q.back();
+
+            ans=max(ans,last.second-first.second+1);
+
+            while(n--){
+                TreeNode* temp=q.front().first;
+                ll val=q.front().second;
+                
                 q.pop_front();
+                if(temp->left)
+                q.push_back({temp->left,2*val+1});
 
-                TreeNode* node=temp.first;
-                ll val=temp.second;
+                if(temp->right)
+                q.push_back({temp->right,2*val+2});
 
-                if(node->left)
-                {
-                    q.push_back({node->left,2*val+1});
-                }
-                if(node->right)
-                {
-                    q.push_back({node->right,2*val+2});
-                }
             }
-            
+
         }
+
 
         return ans;
         
