@@ -2,25 +2,27 @@
 class Solution {
 public:
     int ans=0;
-    int f(TreeNode* root,int x)
-    {
+    void rec(TreeNode* root,int x){
+        
         if(!root)
-        return 0;
-
+        {
+            return  ;
+        }
         x=10*x+root->val;
         if(!root->left and !root->right)
         {
-            return x;    
+            ans+=x;
+            return ;
         }
-        ans=f(root->left,x)+f(root->right,x);
-        return ans;
-    }
+        
+        rec(root->left,x);
+        rec(root->right,x);
 
+    }
     int sumNumbers(TreeNode* root) {
 
-        return f(root,0);
-
-        
+        rec(root,0);
+        return ans;
         
     }
 };
