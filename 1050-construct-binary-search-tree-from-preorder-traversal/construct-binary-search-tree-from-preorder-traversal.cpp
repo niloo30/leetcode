@@ -18,9 +18,9 @@ public:
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
 
-        TreeNode* root=new TreeNode(preorder[0]);
+        TreeNode* root=nullptr;
 
-        for(int i=1;i<preorder.size();i++)
+        for(int i=0;i<preorder.size();i++)
         {
             root=insert(root,preorder[i]);
         }
