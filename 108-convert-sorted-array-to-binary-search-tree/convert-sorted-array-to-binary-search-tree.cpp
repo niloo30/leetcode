@@ -1,32 +1,31 @@
 
 class Solution {
 public:
-    TreeNode* makeBST(vector<int>& nums,int start,int end)
+    TreeNode* maketree(int l,int h,vector<int>& nums)
     {
-        if(start==end)
+        if(l>h)
         return nullptr;
-        int slow=start;
-        int fast=start;
 
-        while(fast!=end && fast!=end-1)
-        {
-            slow++;
-            fast+=2;
-        }
+        if(l==h)
+        return new TreeNode(nums[l]);
 
-        TreeNode* head =new TreeNode(nums[slow]);
-        head->left=makeBST(nums,start,slow);
-        head->right=makeBST(nums,slow+1,end);
+        int mid=(l+h)/2;
 
-        return head;
+        TreeNode* root=new TreeNode(nums[mid]);
+        root->left=maketree(l,mid-1,nums);
+        root->right=maketree(mid+1,h,nums);
+
+
+        return root;
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
 
-        int n=nums.size();
-        if(n==0)
-        return nullptr;
+        int l=0;
+        int h=nums.size()-1;
 
-        return makeBST(nums,0,n);
+
+        TreeNode* root=maketree(l,h,nums);
+        return root;
         
     }
 };
