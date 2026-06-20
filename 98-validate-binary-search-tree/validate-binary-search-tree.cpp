@@ -1,18 +1,24 @@
 class Solution {
 public:
     #define ll long long 
-    bool check(TreeNode* root,ll mini , ll maxi)
+    ll prev=LLONG_MIN;
+    bool check(TreeNode* root)
     {
         if(root==nullptr)
         return true;
 
-        if(root->val <= mini || root->val >=maxi)
+        if(check(root->left)==false)
         return false;
 
-        return check(root->left,mini,root->val) && check(root->right,root->val,maxi);
+        if(root->val<=prev)
+        return false;
+
+        prev=root->val;
+
+        return check(root->right);
     }
     bool isValidBST(TreeNode* root) {
         
-        return check(root,LLONG_MIN,LLONG_MAX);
+        return check(root);
     }
 };
