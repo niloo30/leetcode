@@ -1,31 +1,34 @@
 class Solution {
 public:
+    
     int nonSpecialCount(int l, int r) {
 
-        int x=sqrt(r)+1;
-        vector<bool> arr(x,true);
-        arr[0]=arr[1]=false; 
-        
-        for(int i=2;i*i<arr.size();i++)
+        vector<bool> primes(100001,true);
+        primes[0]=primes[1]=false;
+
+        int n=primes.size();
+
+        for(int i=2;i*i<=n;i++)
         {
-            if(arr[i])
-            {
-                for(int j=i*i;j<arr.size();j+=i)
-                arr[j]=false;
+            if(primes[i]){
+                for(int j=i*i;j<=n;j+=i)
+                {
+                    primes[j]=false;
+                }
             }
+            
+        }
+        int primecount=0;
+        int total=r-l+1;
+
+        for(int i=2;i*i<=r;i++)
+        {
+            if(primes[i] && i*i>=l)
+            primecount++;
         }
 
-        int count=0;
-        int left=sqrt(l);
-        int right=sqrt(r);
 
-        for(int i=left;i<=right;i++)
-        if(arr[i] && i*i<=r && i*i>=l)
-        count++;
-
-        int ans=(r-l+1)-count;
-
-        return ans;
+        return total-primecount;
         
     }
 };
