@@ -1,9 +1,13 @@
-class Solution {
-public:
-    
-    int nonSpecialCount(int l, int r) {
+bool computed=false;
+vector<bool> primes(100001,true);
 
-        vector<bool> primes(100001,true);
+void precompute(){
+
+    if(!computed){
+
+        // compute kr bhai 
+
+        
         primes[0]=primes[1]=false;
 
         int n=primes.size();
@@ -18,6 +22,18 @@ public:
             }
             
         }
+
+        computed=true;
+    }
+}
+
+class Solution {
+public:
+    
+    int nonSpecialCount(int l, int r) {
+
+        precompute();
+
         int primecount=0;
         int total=r-l+1;
 
