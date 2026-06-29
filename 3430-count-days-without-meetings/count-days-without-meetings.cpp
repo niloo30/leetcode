@@ -1,28 +1,41 @@
 class Solution {
 public:
-    int countDays(int d, vector<vector<int>>& arr) {
+    int countDays(int days, vector<vector<int>>& arr) {
+
+
+        //just merge intervals and then simulate the process right 
 
         int n=arr.size();
 
-        int ans=0;
-
         sort(arr.begin(),arr.end());
 
-        ans+=(arr[0][0]-1);
-        int e=arr[0][1];
+        int start=arr[0][0];
+        int end=arr[0][1];
 
-        for(int i=1;i<n;i++)
-        {
-            if(arr[i][0]>e)
-            ans+=((arr[i][0])-e-1);
-
-            e=max(arr[i][1],e);
+        vector<vector<int>> intervals;
+        for(int i=1;i<n;i++){
+            if(arr[i][0]<=end)
+            {
+                end=max(end,arr[i][1]);
+            }
+            else
+            {
+                intervals.push_back({start,end});
+                
+                start=arr[i][0];
+                end=arr[i][1];
+            }
         }
 
-        ans+=(d-e);
+        intervals.push_back({start,end});
+        for(int i=0;i<intervals.size();i++){
 
+            int l=intervals[i][0];
+            int r=intervals[i][1];
 
-        return ans;
-        
+            days-=(r-l+1);
+
+        }
+        return days;
     }
 };
