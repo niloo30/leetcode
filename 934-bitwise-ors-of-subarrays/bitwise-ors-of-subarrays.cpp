@@ -2,21 +2,26 @@ class Solution {
 public:
     int subarrayBitwiseORs(vector<int>& arr) {
 
-        int n=arr.size();
-        unordered_set<int> ans,prev,curr;
 
-        for(int i=0;i<n;i++)
-        {
-            for(auto x: prev)
-            {
-                curr.insert(x | arr[i]);
-                ans.insert(x | arr[i]);
+        set<int> feasible,ans;
+
+
+        for(auto& v:arr){
+            
+            set<int> new_feasible;
+
+            for(int x:feasible){
+                new_feasible.insert(x|v);
             }
-            curr.insert(arr[i]);
-            ans.insert(arr[i]);
+            new_feasible.insert(v);
 
-            prev=curr;
-            curr.clear();
+            feasible=new_feasible;
+
+
+            for(int y:feasible)
+            ans.insert(y);
+            
+
         }
         return ans.size();
         
