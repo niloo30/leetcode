@@ -27,7 +27,7 @@ public:
 
             q.pop();
 
-            if(!(r==entrance[0] && c==entrance[1]) && maze[r][c]=='.' &&(r==0 || r==n-1 || c==0 || c==m-1))
+            if(!(r==entrance[0] && c==entrance[1])  &&(r==0 || r==n-1 || c==0 || c==m-1))
             return dist;
 
             for(int i=0;i<4;i++){
