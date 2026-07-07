@@ -1,77 +1,33 @@
-
-class DisjointSet {
-    
-public:
-    vector<int> rank, parent, size;
-    DisjointSet(int n) {
-        rank.resize(n + 1, 0);
-        parent.resize(n + 1);
-        size.resize(n + 1);
-        for (int i = 0; i <= n; i++) {
-            parent[i] = i;
-            size[i] = 1;
-        }
-    }
-
-    int findUPar(int node) {
-        if (node == parent[node])
-            return node;
-        return parent[node] = findUPar(parent[node]);
-    }
-
-    void unionByRank(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (rank[ulp_u] < rank[ulp_v]) {
-            parent[ulp_u] = ulp_v;
-        }
-        else if (rank[ulp_v] < rank[ulp_u]) {
-            parent[ulp_v] = ulp_u;
-        }
-        else {
-            parent[ulp_v] = ulp_u;
-            rank[ulp_u]++;
-        }
-    }
-
-    void unionBySize(int u, int v) {
-        int ulp_u = findUPar(u);
-        int ulp_v = findUPar(v);
-        if (ulp_u == ulp_v) return;
-        if (size[ulp_u] < size[ulp_v]) {
-            parent[ulp_u] = ulp_v;
-            size[ulp_v] += size[ulp_u];
-        }
-        else {
-            parent[ulp_v] = ulp_u;
-            size[ulp_u] += size[ulp_v];
-        }
-    }
-};
-
-
-
-
-
-
-
-
 class Solution {
 public:
+    bool dfs(int s,int d,vector<vector<int>>& g,vector<int>& vis){
+        if(s==d)
+        return true;
+        vis[s]=1;
+
+        for(int ele:g[s]){
+            if(!vis[ele]){
+                if(dfs(ele,d,g,vis))
+                return true;
+            }
+        }
+        return false;
+    }
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
 
-        DisjointSet ds(n);
-
         int m=edges.size();
+
+        vector<vector<int>> graph(n);
 
         for(int i=0;i<m;i++) {
             int u=edges[i][0];
             int v=edges[i][1];
-            ds.unionBySize(u,v);
+            graph[u].push_back(v);
+            graph[v].push_back(u);
         }
+        vector<int> vis(n);
+        return dfs(source,destination,graph,vis);
 
-        return ds.findUPar(source)==ds.findUPar(destination);
         
     }
 };
