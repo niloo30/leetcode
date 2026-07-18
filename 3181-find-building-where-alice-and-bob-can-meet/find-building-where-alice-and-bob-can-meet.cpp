@@ -1,9 +1,8 @@
 class Solution {
 public:
-    // Builds the segment tree using the max function and stores indices
     void buildSegmentTree(int i, int l, int r, int segmentTree[], vector<int>& heights) {
         if (l == r) {
-            segmentTree[i] = l; // Store the index
+            segmentTree[i] = l; 
             return;
         }
         
@@ -11,43 +10,37 @@ public:
         buildSegmentTree(2 * i + 1, l, mid, segmentTree, heights);
         buildSegmentTree(2 * i + 2, mid + 1, r, segmentTree, heights);
         
-        // Store the index of the maximum element
         segmentTree[i] = (heights[segmentTree[2 * i + 1]] >= heights[segmentTree[2 * i + 2]]) ?
                         segmentTree[2 * i + 1] : segmentTree[2 * i + 2];
     }
 
-    // Function to construct the segment tree
     int* constructST(vector<int>& heights, int n) {
         int* segmentTree = new int[4 * n];
         buildSegmentTree(0, 0, n - 1, segmentTree, heights);
         return segmentTree;
     }
 
-    // Function to query the segment tree for the index of the maximum value in range [start, end]
     int querySegmentTree(int start, int end, int i, int l, int r, int segmentTree[], vector<int>& heights) {
         if (l > end || r < start) {
-            return -1; // Return -1 for out-of-bound queries
+            return -1; 
         }
         
         if (l >= start && r <= end) {
-            return segmentTree[i]; // Return the index of the maximum element
+            return segmentTree[i]; 
         }
         
         int mid = l + (r - l) / 2;
         int leftIndex = querySegmentTree(start, end, 2 * i + 1, l, mid, segmentTree, heights);
         int rightIndex = querySegmentTree(start, end, 2 * i + 2, mid + 1, r, segmentTree, heights);
 
-        // Handle cases where one side is out of bounds
         if (leftIndex == -1)
             return rightIndex;
         if (rightIndex == -1)
             return leftIndex;
 
-        // Return the index of the maximum element
         return (heights[leftIndex] >= heights[rightIndex]) ? leftIndex : rightIndex;
     }
 
-    // Function to return the index of the maximum element in the range from a to b
     int RMIQ(int st[], vector<int>& heights, int n, int a, int b) {
         return querySegmentTree(a, b, 0, 0, n - 1, st, heights);
     }
